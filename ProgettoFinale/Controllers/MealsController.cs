@@ -18,13 +18,13 @@ namespace ProgettoFinale.Controllers
     {
 
         [HttpPost("mealInfo")]
-        public ActionResult<MealInfo> GetAllMealInfo(string stringMeal)
+        public ActionResult<List<MealInfo>> GetAllMealInfo(string stringMeal)
         {
             try
             {
                 using var context = new AppDBContext();
                 MealRetriver mealRetriver = new MealRetriver();
-                MealInfo mealInfo = mealRetriver.GetMealInfo(stringMeal);
+                List<MealInfo> mealInfoList = mealRetriver.GetMealInfo(stringMeal);
                 MealRicerca mealRicerca = new MealRicerca(stringMeal);
 
 
@@ -40,7 +40,7 @@ namespace ProgettoFinale.Controllers
 
                     context.mealsDB.Add(newMeal);
                     context.SaveChanges();
-                    return Ok(new { message = "Meal added successfully", mealInfo });
+                    return Ok(new { message = "Meal added successfully", mealInfoList });
                 }
                 else
                 {
@@ -49,7 +49,7 @@ namespace ProgettoFinale.Controllers
                     context.mealsDB.Update(actualMeal);
                     context.SaveChanges();
 
-                    return(mealInfo == null ? Ok(new { message = "Meal already exists but no in DB", mealInfo }): Ok(new { message = "Meal already exists", mealInfo }));
+                    return(mealInfoList == null ? Ok(new { message = "Meal already exists but no in DB", mealInfoList }): Ok(new { message = "Meal already exists", mealInfoList }));
                     
                 }
                 

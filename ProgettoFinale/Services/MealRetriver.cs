@@ -15,7 +15,7 @@ namespace ProgettoFinale.Services
             this.URL = "https://www.themealdb.com/api/json/v1/1/";
         }
 
-        public MealInfo GetMealInfo(string choice)
+        public List<MealInfo> GetMealInfo(string choice)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace ProgettoFinale.Services
                     var myResponse = JsonConvert.DeserializeObject<Meals>(response.Content);     
                     
 
-                    if(myResponse?.meals?[0] == null) {
+                    if(myResponse?.meals == null) {
                         throw new Exception("No Meal in database");
                     }
-                    MealInfo mealinfo = myResponse.meals[0];
-                    return mealinfo;
+                    List<MealInfo> mealinfoList = myResponse.meals;
+                    return mealinfoList;
                     
 
                 }
