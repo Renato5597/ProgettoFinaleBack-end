@@ -41,6 +41,7 @@
         public string? strMeasure13 { get; set; }
         public string? strMeasure14 { get; set; }
         public string? strMeasure15 { get; set; }
+        public string? strSource { get; set; }
 
     }
 
